@@ -8,11 +8,11 @@ import (
 
 type (
 	ServiceInitializer struct {
-		Logger    nacelle.Logger           `service:"logger"`
-		Container nacelle.ServiceContainer `service:"container"`
-		name      string
-		factory   Factory
-		configs   []*aws.Config
+		Logger   nacelle.Logger           `service:"logger"`
+		Services nacelle.ServiceContainer `service:"services"`
+		name     string
+		factory  Factory
+		configs  []*aws.Config
 	}
 
 	Factory func(sess *session.Session) interface{}
@@ -41,7 +41,7 @@ func (i *ServiceInitializer) Init(config nacelle.Config) error {
 		return err
 	}
 
-	return i.Container.Set(i.name, i.factory(sess))
+	return i.Services.Set(i.name, i.factory(sess))
 }
 
 func (i *ServiceInitializer) loadConfig(config nacelle.Config) (*aws.Config, error) {
