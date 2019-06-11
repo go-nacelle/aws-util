@@ -45,10 +45,10 @@ func (i *ServiceInitializer) Init(config nacelle.Config) error {
 }
 
 func (i *ServiceInitializer) loadConfig(config nacelle.Config) (*aws.Config, error) {
-	tagModifiers := []TagModifier{
-		NewFileTagSetter(),
-		NewEnvTagPrefixer(i.name),
-		NewFileTagPrefixer(i.name),
+	tagModifiers := []nacelle.TagModifier{
+		nacelle.NewFileTagSetter(),
+		nacelle.NewEnvTagPrefixer(i.name),
+		nacelle.NewFileTagPrefixer(i.name),
 	}
 
 	serviceConfig := &Config{}
