@@ -45,19 +45,25 @@ func (i *ServiceInitializer) Init(config nacelle.Config) error {
 }
 
 func (i *ServiceInitializer) loadConfig(config nacelle.Config) (*aws.Config, error) {
-	tagModifiers := []nacelle.TagModifier{
+	serviceTagModifiers := []nacelle.TagModifier{
+		nacelle.NewFileTagSetter(),
+		nacelle.NewEnvTagPrefixer(i.name),
+		nacelle.NewFileTagPrefixer(i.name),
+	}
+
+	globalTagModifiers := []nacelle.TagModifier{
 		nacelle.NewFileTagSetter(),
 		nacelle.NewEnvTagPrefixer(i.name),
 		nacelle.NewFileTagPrefixer(i.name),
 	}
 
 	serviceConfig := &Config{}
-	if err := config.Load(&serviceConfig, tagModifiers...); err != nil {
+	if err := config.Load(&serviceConfig, serviceTagModifiers...); err != nil {
 		return nil, err
 	}
 
 	if serviceConfig.IsDefault() {
-		if err := config.Load(&serviceConfig, tagModifiers[0]); err != nil {
+		if err := config.Load(&serviceConfig, globalTagModifiers...); err != nil {
 			return nil, err
 		}
 	}
