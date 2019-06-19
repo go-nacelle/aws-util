@@ -33,7 +33,7 @@ type Config struct {
 var levelMap = map[string]aws.LogLevelType{
 	"off":                          aws.LogOff,
 	"debug":                        aws.LogDebug,
-	"debug_with_signing  ":         aws.LogDebugWithSigning,
+	"debug_with_signing":           aws.LogDebugWithSigning,
 	"debug_with_http_body":         aws.LogDebugWithHTTPBody,
 	"debug_with_request_retries":   aws.LogDebugWithRequestRetries,
 	"debug_with_request_errors":    aws.LogDebugWithRequestErrors,
