@@ -55,7 +55,7 @@ func (c *Config) IsDefault() bool {
 		return false
 	}
 
-	bools := []bool{
+	booleanFields := []bool{
 		c.CredentialsChainVerboseErrors,
 		c.DisableComputeChecksums,
 		c.DisableEndpointHostPrefix,
@@ -72,8 +72,8 @@ func (c *Config) IsDefault() bool {
 		c.UseDualStack,
 	}
 
-	for _, b := range bools {
-		if b {
+	for _, value := range booleanFields {
+		if value {
 			return false
 		}
 	}
