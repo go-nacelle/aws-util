@@ -1,3 +1,5 @@
+//+build !test
+
 package awsutil
 
 import (
@@ -128,6 +130,9 @@ import (
 	"github.com/aws/aws-sdk-go/service/opsworks"
 	"github.com/aws/aws-sdk-go/service/opsworkscm"
 	"github.com/aws/aws-sdk-go/service/organizations"
+	"github.com/aws/aws-sdk-go/service/personalize"
+	"github.com/aws/aws-sdk-go/service/personalizeevents"
+	"github.com/aws/aws-sdk-go/service/personalizeruntime"
 	"github.com/aws/aws-sdk-go/service/pi"
 	"github.com/aws/aws-sdk-go/service/pinpoint"
 	"github.com/aws/aws-sdk-go/service/pinpointemail"
@@ -936,6 +941,24 @@ func NewOpsWorksCMServiceInitializer() nacelle.Initializer {
 func NewOrganizationsServiceInitializer() nacelle.Initializer {
 	return NewServiceInitializer("organizations", func(sess *session.Session) interface{} {
 		return organizations.New(sess)
+	})
+}
+
+func NewPersonalizeServiceInitializer() nacelle.Initializer {
+	return NewServiceInitializer("personalize", func(sess *session.Session) interface{} {
+		return personalize.New(sess)
+	})
+}
+
+func NewPersonalizeEventsServiceInitializer() nacelle.Initializer {
+	return NewServiceInitializer("personalizeevents", func(sess *session.Session) interface{} {
+		return personalizeevents.New(sess)
+	})
+}
+
+func NewPersonalizeRuntimeServiceInitializer() nacelle.Initializer {
+	return NewServiceInitializer("personalizeruntime", func(sess *session.Session) interface{} {
+		return personalizeruntime.New(sess)
 	})
 }
 
