@@ -1,6 +1,8 @@
 package awsutil
 
 import (
+	"fmt"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/go-nacelle/nacelle"
 )
@@ -16,5 +18,14 @@ func NewAWSLogAdapter(logger nacelle.Logger) aws.Logger {
 }
 
 func (a *AWSLogAdapter) Log(args ...interface{}) {
-	a.logger.Debug("AWS: %#v", args) // TODO
+	if len(args) == 0 {
+		return
+	}
+
+	format, ok := args[0].(string)
+	if !ok {
+		format = fmt.Sprintf("%s", args[0])
+	}
+
+	a.logger.Debug(format, args[1:]...)
 }
