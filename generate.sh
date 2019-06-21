@@ -22,7 +22,9 @@ for name in ${NAMES[@]}; do
     IMPORTS+=( "${SDK_PATH}/service/${name,,}" )
 done
 
-echo "package awsutil" > services.go
+echo "//+build !test" > services.go
+echo "" >> services.go
+echo "package awsutil" >> services.go
 echo "import (`printf '"%s"\n' ${IMPORTS[*]}`)" >> services.go
 
 for name in ${NAMES[@]}; do
