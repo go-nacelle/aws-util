@@ -20,7 +20,7 @@ type Config struct {
 	Endpoint                          string `env:"endpoint"`
 	EnforceShouldRetryCheck           bool   `env:"enforce_should_retry_check"`
 	MaxRetries                        int    `env:"max_retries" default:"-1"`
-	RawLogLevel                       string `env:"log_level"`
+	RawLogLevel                       string `env:"log_level" default:"off"`
 	Region                            string `env:"region"`
 	S3Disable100Continue              bool   `env:"s3_disable_100_continue"`
 	S3DisableContentMD5Validation     bool   `env:"s3_disable_content_md5_validation"`
