@@ -18,7 +18,7 @@ type (
 	Factory func(sess *session.Session) interface{}
 )
 
-func NewServiceInitializer(name string, factory Factory, configs ...*aws.Config) nacelle.Initializer {
+func NewServiceInitializer(name string, factory Factory, configs ...*aws.Config) *ServiceInitializer {
 	return &ServiceInitializer{
 		name:    name,
 		factory: factory,
@@ -53,17 +53,17 @@ func (i *ServiceInitializer) loadConfig(config nacelle.Config) (*aws.Config, err
 
 	globalTagModifiers := []nacelle.TagModifier{
 		nacelle.NewFileTagSetter(),
-		nacelle.NewEnvTagPrefixer(i.name),
-		nacelle.NewFileTagPrefixer(i.name),
+		nacelle.NewEnvTagPrefixer("aws"),
+		nacelle.NewFileTagPrefixer("aws"),
 	}
 
 	serviceConfig := &Config{}
-	if err := config.Load(&serviceConfig, serviceTagModifiers...); err != nil {
+	if err := config.Load(serviceConfig, serviceTagModifiers...); err != nil {
 		return nil, err
 	}
 
 	if serviceConfig.IsDefault() {
-		if err := config.Load(&serviceConfig, globalTagModifiers...); err != nil {
+		if err := config.Load(serviceConfig, globalTagModifiers...); err != nil {
 			return nil, err
 		}
 	}
