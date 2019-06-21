@@ -10,4 +10,5 @@ jobs:
           name: Run unit tests
           command: |
             go get ./...
-            goveralls -covermode=atomic -package=./... -race -service=circle-ci -v -flags "-tags test"
+            go test -race -covermode=atomic -coverprofile=cover.out -v -tags test
+            goveralls -coverprofile=cover.out -service=circle-ci
