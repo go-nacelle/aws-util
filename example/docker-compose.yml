@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      # Fake AWS credentials
+      - AWS_ACCESS_KEY_ID=56WPtPSyNEVfvevg5LCD
+      - AWS_SECRET_ACCESS_KEY=cq4X24UMxczm6kc8PADL3KnP6rRkAfhKuAbgpQEF
+      # Point DynamoDB to localstack
+      - DYNAMODB_TABLE_NAME=awsutil-test
+      - DYNAMODB_REGION=us-east-1
+      - DYNAMODB_ENDPOINT=http://localstack:4569
+    ports:
+      - 5000:5000
+    depends_on:
+      - localstack
+
+  localstack:
+    image: localstack/localstack
+    environment:
+      - DEBUG=true
+      - SERVICES=dynamodb
+    ports:
+      - 4569:4569
