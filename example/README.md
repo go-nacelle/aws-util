@@ -1,10 +1,10 @@
 # AWS Util Example
 
-A trivial example application to showcase the [awsutil](https://github.com/go-nacelle/awsutil) library.
+A trivial example application to showcase the [awsutil](https://nacelle.dev/docs/libraries/awsutil) library.
 
 ## Overview
 
-This example application uses DynamoDB to provide a simple string get/set API over HTTP. The **main** function boots [nacelle](https://github.com/go-nacelle/nacelle) with a initializer that creates a DynamoDB client and a server initializer for the process provided by the [httpbase](https://github.com/go-nacelle) library. The client created by the former is injected into the later.
+This example application uses DynamoDB to provide a simple string get/set API over HTTP. The **main** function boots [nacelle](https://nacelle.dev/docs/core) with a initializer that creates a DynamoDB client and a server initializer for the process provided by the [httpbase](https://nacelle.dev/docs/base-processes/httpbase) library. The client created by the former is injected into the later.
 
 ## Building and Running
 
