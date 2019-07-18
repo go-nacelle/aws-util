@@ -6,7 +6,7 @@ AWS service utilities for use with nacelle.
 
 ### Usage
 
-This library contains 178 generated nacelle [initializers](https://github.com/go-nacelle/process) for AWS services. Each initializer creates an instance of an AWS service `NewDynamoDBServiceInitializer` inside the nacelle [service container](https://github.com/go-nacelle/service) with its own configuration (see below).
+This library contains 178 generated nacelle [initializers](https://nacelle.dev/docs/core/process) for AWS services. Each initializer creates an instance of an AWS service `NewDynamoDBServiceInitializer` inside the nacelle [service container](https://nacelle.dev/docs/core/service) with its own configuration (see below).
 
 The following example creates clients for DynamoDB, Kinesis, and S3.
 
