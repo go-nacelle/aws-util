@@ -1,6 +1,6 @@
 module github.com/go-nacelle/awsutil
 
-go 1.19
+go 1.18
 
 require (
 	github.com/aws/aws-sdk-go v1.20.7
