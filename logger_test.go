@@ -1,38 +1,36 @@
 package awsutil
 
 import (
-	"github.com/aphistic/sweet"
-	. "github.com/efritz/go-mockgen/matchers"
+	"testing"
+
+	mockassert "github.com/derision-test/go-mockgen/testutil/assert"
 	"github.com/go-nacelle/nacelle/mocks"
-	. "github.com/onsi/gomega"
 )
 
-type LoggerSuite struct{}
-
-func (s *LoggerSuite) TestLogAdapter(t sweet.T) {
+func TestLogAdapter(t *testing.T) {
 	logger := mocks.NewMockLogger()
 	adapter := NewAWSLogAdapter(logger)
 	adapter.Log("Hello")
-	Expect(logger.DebugFunc).To(BeCalledWith("Hello"))
+	mockassert.CalledWith(t, logger.DebugFunc, mockassert.Values("Hello"))
 }
 
-func (s *LoggerSuite) TestLogAdapterWithArgs(t sweet.T) {
+func TestLogAdapterWithArgs(t *testing.T) {
 	logger := mocks.NewMockLogger()
 	adapter := NewAWSLogAdapter(logger)
 	adapter.Log("Hello, %s and %s", "bar", "baz")
-	Expect(logger.DebugFunc).To(BeCalledWith("Hello, %s and %s", "bar", "baz"))
+	mockassert.CalledWith(t, logger.DebugFunc, mockassert.Values("Hello, %s and %s", "bar", "baz"))
 }
 
-func (s *LoggerSuite) TestLogAdapterNonStringFormat(t sweet.T) {
+func TestLogAdapterNonStringFormat(t *testing.T) {
 	logger := mocks.NewMockLogger()
 	adapter := NewAWSLogAdapter(logger)
 	adapter.Log([]string{"this", "is", "dangerous"})
-	Expect(logger.DebugFunc).To(BeCalledWith("[this is dangerous]"))
+	mockassert.CalledWith(t, logger.DebugFunc, mockassert.Values("[this is dangerous]"))
 }
 
-func (s *LoggerSuite) TestLogAdapterNoArgs(t sweet.T) {
+func TestLogAdapterNoArgs(t *testing.T) {
 	logger := mocks.NewMockLogger()
 	adapter := NewAWSLogAdapter(logger)
 	adapter.Log()
-	Expect(logger.DebugFunc).NotTo(BeCalled())
+	mockassert.NotCalled(t, logger.DebugFunc)
 }

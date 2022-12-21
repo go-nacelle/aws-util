@@ -1,19 +1,19 @@
 package awsutil
 
 import (
-	"github.com/aphistic/sweet"
+	"testing"
+
 	"github.com/go-nacelle/nacelle"
-	. "github.com/onsi/gomega"
+	"github.com/stretchr/testify/require"
 )
 
-type ConfigSuite struct{}
-
-func (s *ConfigSuite) TestILlegalLogLevel(t sweet.T) {
+func TestConfigIllegalLogLevel(t *testing.T) {
 	config := &Config{RawLogLevel: "unknown"}
-	Expect(config.PostLoad()).To(MatchError("unknown aws log level type 'unknown'"))
+
+	require.EqualError(t, config.PostLoad(), "unknown aws log level type 'unknown'")
 }
 
-func (s *ConfigSuite) TestIsDefault(t sweet.T) {
+func TestConfigIsDefault(t *testing.T) {
 	setterFuncs := []func(c *Config){
 		func(c *Config) { c.CredentialsChainVerboseErrors = true },
 		func(c *Config) { c.DisableComputeChecksums = true },
@@ -40,10 +40,10 @@ func (s *ConfigSuite) TestIsDefault(t sweet.T) {
 	for _, setterFunc := range setterFuncs {
 		awsConfig := &Config{}
 		err := config.Load(awsConfig)
-		Expect(err).To(BeNil())
+		require.Nil(t, err)
 
-		Expect(awsConfig.IsDefault()).To(BeTrue())
+		require.True(t, awsConfig.IsDefault())
 		setterFunc(awsConfig)
-		Expect(awsConfig.IsDefault()).To(BeFalse())
+		require.False(t, awsConfig.IsDefault())
 	}
 }
