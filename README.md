@@ -1,4 +1,8 @@
-# Nacelle AWS Utilities [![GoDoc](https://godoc.org/github.com/go-nacelle/awsutil?status.svg)](https://godoc.org/github.com/go-nacelle/awsutil) [![CircleCI](https://circleci.com/gh/go-nacelle/awsutil.svg?style=svg)](https://circleci.com/gh/go-nacelle/awsutil) [![Coverage Status](https://coveralls.io/repos/github/go-nacelle/awsutil/badge.svg?branch=master)](https://coveralls.io/github/go-nacelle/awsutil?branch=master)
+# Nacelle AWS Utilities
+
+[![PkgGoDev](https://pkg.go.dev/badge/badge/github.com/go-nacelle/awsutil.svg)](https://pkg.go.dev/github.com/go-nacelle/awsutil)
+[![Build status](https://github.com/go-nacelle/awsutil/actions/workflows/test.yml/badge.svg)](https://github.com/go-nacelle/awsutil/actions/workflows/test.yml)
+[![Latest release](https://img.shields.io/github/release/go-nacelle/awsutil.svg)](https://github.com/go-nacelle/awsutil/releases/)
 
 AWS service utilities for use with nacelle.
 
